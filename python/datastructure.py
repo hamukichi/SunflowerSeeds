@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""Implementation of data structures for competitive programming.
+"""
+
+
 import itertools
 
 
