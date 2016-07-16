@@ -1,5 +1,24 @@
 #!/usr/bin/env python3
 
+"""This module contains functions related to prime numbers.
+
+Features:
+
+* Determing whether the given integer is prime
+
+    * Trial Division
+    * Miller-Rabin test
+
+* Enumerating prime numbers
+
+    * Sieve of Eratosthenes
+
+* Factorizing the given integer in prime numbers
+
+    * Trial Division
+
+"""
+
 import array
 import math
 import random
