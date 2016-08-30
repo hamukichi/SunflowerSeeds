@@ -66,3 +66,10 @@ def in_place_convex_hull_andrew(ps):
         k += 1
     ch = ch[:k - 1]
     return ch
+
+    
+def area_polygon(points):
+    n = len(points)
+    s = sum(outer_product(points[i], points[(i + 1) % n])
+            for i in range(n)) / 2.0
+    return s
