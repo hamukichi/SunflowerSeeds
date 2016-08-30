@@ -26,7 +26,7 @@ def project(a, b):
     return a * inner_product(a, b) / (abs(a) ** 2)
 
 
-def judge_relation(p0, p1, p2):
+def judge_points_relation(p0, p1, p2):
     v1 = p1 - p0
     v2 = p2 - p0
     op = outer_product(v1, v2)
