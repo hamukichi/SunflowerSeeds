@@ -29,3 +29,31 @@ class CumulativeSum(object):
         :return: The partial sum.
         """
         return self.cumulative_sum[last + 1] - self.cumulative_sum[first]
+
+
+class UnionFind(object):
+
+    def __init__(self, number_of_nodes):
+        self.par = list(range(number_of_nodes))
+        self.rank = [0] * number_of_nodes
+
+    def root(self, node):
+        if self.par[node] == node:
+            return node
+        else:
+            r = self.root(self.par[node])
+            self.par[node] = r
+            return r
+
+    def in_the_same_set(self, node1, node2):
+        return self.root(node1) == self.root(node2)
+
+    def unite(self, node1, node2):
+        x = self.root(node1)
+        y = self.root(node2)
+        if x != y:
+            if self.rank[x] < self.rank[y]:
+                x, y = y, x
+            self.par[y] = x
+            if self.rank[x] == self.rank[y]:
+                self.rank[x] += 1

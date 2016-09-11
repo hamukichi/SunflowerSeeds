@@ -41,7 +41,7 @@ def points_relation(p0, p1, p2):
     else:
         return PointsRelation.on_segment
 
-        
+
 def in_place_convex_hull_andrew(ps):
     def judge(p0, p1, p2):
         b = points_relation(p0, p1, p2) != PointsRelation.counter_clockwise
@@ -67,7 +67,7 @@ def in_place_convex_hull_andrew(ps):
     ch = ch[:k - 1]
     return ch
 
-    
+
 def area_polygon(points):
     n = len(points)
     s = sum(outer_product(points[i], points[(i + 1) % n])
