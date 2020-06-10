@@ -27,7 +27,6 @@ class CumulativeSum(object):
         - `first`: The index representing the first element of the subsequence.
         - `last`: The index representing the first element of the subsequence.
         
-
         Returns: the partial sum.
         """
         return self.cumulative_sum[last + 1] - self.cumulative_sum[first]
