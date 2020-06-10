@@ -41,11 +41,3 @@ class UnionFind(object):
             self.par[y] = x
             if self.rank[x] == self.rank[y]:
                 self.rank[x] += 1
-
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    main()

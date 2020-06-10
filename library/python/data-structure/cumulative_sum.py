@@ -30,11 +30,3 @@ class CumulativeSum(object):
         Returns: the partial sum.
         """
         return self.cumulative_sum[last + 1] - self.cumulative_sum[first]
-
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    main()
