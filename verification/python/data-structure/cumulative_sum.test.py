@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# https://judge.yosupo.jp/problem/static_range_sum
 
 
 import itertools
