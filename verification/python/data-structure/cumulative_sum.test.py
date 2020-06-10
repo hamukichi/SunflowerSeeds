@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 
-"""Cumulative sum.
-"""
-
 
 import itertools
 
@@ -32,8 +29,16 @@ class CumulativeSum(object):
         return self.cumulative_sum[last + 1] - self.cumulative_sum[first]
 
 
+def process_queries(n, bs, queries):
+    cs = CumulativeSum(bs)
+    return (cs.partial_sum(l, r - 1) for l, r in queries)
+
+
 def main():
-    pass
+    n, q = (int(z) for z in input().split())
+    bs = [int(b) for b in input().split()]
+    queries = [tuple(int(z) for z in input().split()) for _ in range(q)]
+    print(*process_queries(n, bs, queries), sep="\n")
 
 
 if __name__ == '__main__':
