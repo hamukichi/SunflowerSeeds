@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 """Implements disjoint-set data structures (so-called union-find data structures).
+
+Verification: [Union Find](https://judge.yosupo.jp/submission/11774)
 """
 
 

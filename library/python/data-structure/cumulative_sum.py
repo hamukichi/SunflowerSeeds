@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 """Cumulative sum.
+
+Verification: [Static Range Sum](https://judge.yosupo.jp/submission/11777)
 """
 
 
