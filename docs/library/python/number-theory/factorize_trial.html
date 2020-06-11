@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>python API documentation</title>
-<meta name="description" content="" />
+<title>python.number-theory.factorize_trial API documentation</title>
+<meta name="description" content="Compute the prime factorization of the given integer by trial division …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,26 +17,81 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Namespace <code>python</code></h1>
+<h1 class="title">Module <code>python.number-theory.factorize_trial</code></h1>
 </header>
 <section id="section-intro">
+<p>Compute the prime factorization of the given integer by trial division.</p>
+<p>Verification: <a href="https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/NTL_1_A/judge/4571073/Python3">NTL_1_A</a></p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#!/usr/bin/env python3
+
+&#34;&#34;&#34;Compute the prime factorization of the given integer by trial division.
+
+Verification: [NTL_1_A](https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/NTL_1_A/judge/4571073/Python3)
+&#34;&#34;&#34;
+
+import math
+
+
+def factorize_trial_division(n):
+    &#34;&#34;&#34;Compute the prime factorization of the given integer `n` by trial division.
+
+    Returns: the prime factors as a list.
+    &#34;&#34;&#34;
+    factors = []
+    if n &lt; 2:
+        return factors
+    for p in range(2, math.ceil(math.sqrt(n)) + 1):
+        if p * p &gt; n:
+            break
+        while n % p == 0:
+            factors.append(p)
+            n //= p
+    if n &gt; 1:
+        factors.append(n)
+    return factors</code></pre>
+</details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="python.data-structure" href="data-structure/index.html">python.data-structure</a></code></dt>
+<dt id="python.number-theory.factorize_trial.factorize_trial_division"><code class="name flex">
+<span>def <span class="ident">factorize_trial_division</span></span>(<span>n)</span>
+</code></dt>
 <dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="python.number-theory" href="number-theory/index.html">python.number-theory</a></code></dt>
-<dd>
-<div class="desc"></div>
+<div class="desc"><p>Compute the prime factorization of the given integer <code>n</code> by trial division.</p>
+<p>Returns: the prime factors as a list.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def factorize_trial_division(n):
+    &#34;&#34;&#34;Compute the prime factorization of the given integer `n` by trial division.
+
+    Returns: the prime factors as a list.
+    &#34;&#34;&#34;
+    factors = []
+    if n &lt; 2:
+        return factors
+    for p in range(2, math.ceil(math.sqrt(n)) + 1):
+        if p * p &gt; n:
+            break
+        while n % p == 0:
+            factors.append(p)
+            n //= p
+    if n &gt; 1:
+        factors.append(n)
+    return factors</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -47,10 +102,14 @@
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3>Super-module</h3>
 <ul>
-<li><code><a title="python.data-structure" href="data-structure/index.html">python.data-structure</a></code></li>
-<li><code><a title="python.number-theory" href="number-theory/index.html">python.number-theory</a></code></li>
+<li><code><a title="python.number-theory" href="index.html">python.number-theory</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="python.number-theory.factorize_trial.factorize_trial_division" href="#python.number-theory.factorize_trial.factorize_trial_division">factorize_trial_division</a></code></li>
 </ul>
 </li>
 </ul>
