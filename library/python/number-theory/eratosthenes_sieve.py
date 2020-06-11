@@ -11,10 +11,10 @@ def sieve_of_eratosthenes(end):
 
     Returns (as a tuple):
 
-        - `is_prime`: a list of bool values.
-          If an integer `i` is a prime number, then `is_prime[i]` is True.
-          Otherwise `is_prime[i]` is False.
-        - `primes`: a list of prime numbers below `end`.
+    - `is_prime`: a list of bool values.
+      If an integer `i` is a prime number, then `is_prime[i]` is True.
+      Otherwise `is_prime[i]` is False.
+    - `primes`: a list of prime numbers below `end`.
     """
 
     if end <= 1:
