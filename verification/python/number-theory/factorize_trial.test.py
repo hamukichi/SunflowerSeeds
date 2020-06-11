@@ -25,3 +25,13 @@ def factorize_trial_division(n):
     if n > 1:
         factors.append(n)
     return factors
+
+
+def main():
+    n = int(input())
+    fs = factorize_trial_division(n)
+    print("{}:".format(n), *fs)
+
+
+if __name__ == '__main__':
+    main()
