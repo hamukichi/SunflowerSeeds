@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
+# https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/0009/judge/4571021/Python3
 
 """Enumerates primes using the sieve of Eratosthenes.
-
-Verification: [0009](https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/0009/judge/4571021/Python3)
 """
+
+
+import sys
 
 
 def sieve_of_eratosthenes(end):
@@ -29,3 +31,16 @@ def sieve_of_eratosthenes(end):
             for j in range(2 * i, end, i):
                 is_prime[j] = False
     return is_prime, primes
+
+
+
+def main():
+    ns = [int(n) for n in sys.stdin.readlines()]
+    max_n = max(ns)
+    is_prime, _ = sieve_of_eratosthenes(max_n + 1)
+    for n in ns:
+        print(sum(is_prime[:n + 1]))
+
+
+if __name__ == '__main__':
+    main()
