@@ -10,7 +10,7 @@ import itertools
 
 
 # the value which represents "infinity."
-INF = 10 ** 10
+INF = 1000000000000000000
 
 
 def in_place_warshall_floyd(adj_matrix):
