@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>python API documentation</title>
-<meta name="description" content="" />
+<title>python.graph.all_pairs_shortest_path_warshall_floyd API documentation</title>
+<meta name="description" content="Computes all pairs shortest paths in a graph using the Warshall-Floyd algorithm …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,30 +17,97 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Namespace <code>python</code></h1>
+<h1 class="title">Module <code>python.graph.all_pairs_shortest_path_warshall_floyd</code></h1>
 </header>
 <section id="section-intro">
+<p>Computes all pairs shortest paths in a graph using the Warshall-Floyd algorithm.</p>
+<p>Verification: <a href="https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/GRL_1_C/judge/4573276/Python3">GRL_1_C</a></p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#!/usr/bin/env python3
+
+&#34;&#34;&#34;Computes all pairs shortest paths in a graph using the Warshall-Floyd algorithm.
+
+Verification: [GRL_1_C](https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/GRL_1_C/judge/4573276/Python3)
+&#34;&#34;&#34;
+
+
+import itertools
+
+
+# the value which represents &#34;infinity.&#34;
+INF = 1000000000000000000
+
+
+def in_place_warshall_floyd(adj_matrix):
+    &#34;&#34;&#34;Solves the all-pairs shortest path problem using the Warshall-Floyd algorithm.
+
+    The adjacency matrix A of the graph. This object must be
+    able to be treated as a $n \times n$ matrix. $A_{i, j}$ represents the
+    cost of the edge $i \rightarrow j$. If $A_{i, j}$ is `INF`` or more,
+    there is no edge between the two vertices. For all $x$, $A_{x, x} = 0$.
+    Note that this matrix will be modified in place during calculation.
+    
+    Returns: whether the graph has a negative cycle.
+    &#34;&#34;&#34;
+
+    n = len(adj_matrix)
+    for k, i, j in itertools.product(range(n), repeat=3):
+        if adj_matrix[i][k] == INF or adj_matrix[k][j] == INF:
+            continue
+        adj_matrix[i][j] = min(adj_matrix[i][j],
+                               adj_matrix[i][k] + adj_matrix[k][j])
+    return any(adj_matrix[i][i] &lt; 0 for i in range(n))</code></pre>
+</details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="python.data-structure" href="data-structure/index.html">python.data-structure</a></code></dt>
+<dt id="python.graph.all_pairs_shortest_path_warshall_floyd.in_place_warshall_floyd"><code class="name flex">
+<span>def <span class="ident">in_place_warshall_floyd</span></span>(<span>adj_matrix)</span>
+</code></dt>
 <dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="python.graph" href="graph/index.html">python.graph</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="python.number-theory" href="number-theory/index.html">python.number-theory</a></code></dt>
-<dd>
-<div class="desc"></div>
+<div class="desc"><p>Solves the all-pairs shortest path problem using the Warshall-Floyd algorithm.</p>
+<p>The adjacency matrix A of the graph. This object must be
+able to be treated as a $n
+imes n$ matrix. $A_{i, j}$ represents the
+cost of the edge $i
+ightarrow j$. If $A_{i, j}$ is `INF`` or more,
+there is no edge between the two vertices. For all $x$, $A_{x, x} = 0$.
+Note that this matrix will be modified in place during calculation.</p>
+<p>Returns: whether the graph has a negative cycle.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def in_place_warshall_floyd(adj_matrix):
+    &#34;&#34;&#34;Solves the all-pairs shortest path problem using the Warshall-Floyd algorithm.
+
+    The adjacency matrix A of the graph. This object must be
+    able to be treated as a $n \times n$ matrix. $A_{i, j}$ represents the
+    cost of the edge $i \rightarrow j$. If $A_{i, j}$ is `INF`` or more,
+    there is no edge between the two vertices. For all $x$, $A_{x, x} = 0$.
+    Note that this matrix will be modified in place during calculation.
+    
+    Returns: whether the graph has a negative cycle.
+    &#34;&#34;&#34;
+
+    n = len(adj_matrix)
+    for k, i, j in itertools.product(range(n), repeat=3):
+        if adj_matrix[i][k] == INF or adj_matrix[k][j] == INF:
+            continue
+        adj_matrix[i][j] = min(adj_matrix[i][j],
+                               adj_matrix[i][k] + adj_matrix[k][j])
+    return any(adj_matrix[i][i] &lt; 0 for i in range(n))</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -51,11 +118,14 @@
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3>Super-module</h3>
 <ul>
-<li><code><a title="python.data-structure" href="data-structure/index.html">python.data-structure</a></code></li>
-<li><code><a title="python.graph" href="graph/index.html">python.graph</a></code></li>
-<li><code><a title="python.number-theory" href="number-theory/index.html">python.number-theory</a></code></li>
+<li><code><a title="python.graph" href="index.html">python.graph</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="python.graph.all_pairs_shortest_path_warshall_floyd.in_place_warshall_floyd" href="#python.graph.all_pairs_shortest_path_warshall_floyd.in_place_warshall_floyd">in_place_warshall_floyd</a></code></li>
 </ul>
 </li>
 </ul>

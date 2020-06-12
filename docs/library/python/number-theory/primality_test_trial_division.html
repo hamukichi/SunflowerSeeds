@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>python API documentation</title>
-<meta name="description" content="" />
+<title>python.number-theory.primality_test_trial_division API documentation</title>
+<meta name="description" content="Determines whether an input integer is prime, by trial division …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,30 +17,74 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Namespace <code>python</code></h1>
+<h1 class="title">Module <code>python.number-theory.primality_test_trial_division</code></h1>
 </header>
 <section id="section-intro">
+<p>Determines whether an input integer is prime, by trial division.</p>
+<p>Verification: <a href="https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/ALDS1_1_C/judge/4573115/Python3">ALDS1_1_C</a></p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#!/usr/bin/env python3
+
+&#34;&#34;&#34;Determines whether an input integer is prime, by trial division.
+
+Verification: [ALDS1_1_C](https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/ALDS1_1_C/judge/4573115/Python3)
+&#34;&#34;&#34;
+
+
+def is_prime_trial_division(n):
+    &#34;&#34;&#34;Determing whether the given integer `n` is prime by trial division.
+
+    &#34;&#34;&#34;
+
+    assert n &gt; 0
+    if n &lt; 2:
+        return False
+    else:
+        for i in range(2, n):
+            if i * i &gt; n:
+                break
+            elif n % i == 0:
+                return False
+        return True</code></pre>
+</details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="python.data-structure" href="data-structure/index.html">python.data-structure</a></code></dt>
+<dt id="python.number-theory.primality_test_trial_division.is_prime_trial_division"><code class="name flex">
+<span>def <span class="ident">is_prime_trial_division</span></span>(<span>n)</span>
+</code></dt>
 <dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="python.graph" href="graph/index.html">python.graph</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="python.number-theory" href="number-theory/index.html">python.number-theory</a></code></dt>
-<dd>
-<div class="desc"></div>
+<div class="desc"><p>Determing whether the given integer <code>n</code> is prime by trial division.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_prime_trial_division(n):
+    &#34;&#34;&#34;Determing whether the given integer `n` is prime by trial division.
+
+    &#34;&#34;&#34;
+
+    assert n &gt; 0
+    if n &lt; 2:
+        return False
+    else:
+        for i in range(2, n):
+            if i * i &gt; n:
+                break
+            elif n % i == 0:
+                return False
+        return True</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -51,11 +95,14 @@
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3>Super-module</h3>
 <ul>
-<li><code><a title="python.data-structure" href="data-structure/index.html">python.data-structure</a></code></li>
-<li><code><a title="python.graph" href="graph/index.html">python.graph</a></code></li>
-<li><code><a title="python.number-theory" href="number-theory/index.html">python.number-theory</a></code></li>
+<li><code><a title="python.number-theory" href="index.html">python.number-theory</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="python.number-theory.primality_test_trial_division.is_prime_trial_division" href="#python.number-theory.primality_test_trial_division.is_prime_trial_division">is_prime_trial_division</a></code></li>
 </ul>
 </li>
 </ul>
