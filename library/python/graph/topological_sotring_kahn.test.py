@@ -51,17 +51,3 @@ def topological_sort_kahn(num_vs, adj_vs):
         return sorted_vs
     else:
         raise TopologicalSortError("The graph has a cycle")
-
-
-def main():
-    v, e = map(int, input().split())
-    adj_vs = [set() for _ in range(v)]
-    for _ in range(e):
-        s, t = map(int, input().split())
-        adj_vs[s].add(t)
-    for u in topological_sort_kahn(v, adj_vs):
-        print(u)
-
-
-if __name__ == "__main__":
-    main()
