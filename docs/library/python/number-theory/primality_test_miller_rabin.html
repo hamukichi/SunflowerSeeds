@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>python.number-theory API documentation</title>
-<meta name="description" content="" />
+<title>python.number-theory.primality_test_miller_rabin API documentation</title>
+<meta name="description" content="Determines whether an input integer is prime, using the Miller-Rabin test …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -18,38 +18,97 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Namespace <code>python.number-theory</code></h1>
+<h1 class="title">Module <code>python.number-theory.primality_test_miller_rabin</code></h1>
 </header>
 <section id="section-intro">
+<p>Determines whether an input integer is prime, using the Miller-Rabin test.</p>
+<p>Verification: <a href="https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/ALDS1_1_C/judge/4573080/Python3">ALDS1_1_C</a></p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#!/usr/bin/env python3
+
+&#34;&#34;&#34;Determines whether an input integer is prime, using the Miller-Rabin test.
+
+Verification: [ALDS1_1_C](https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/ALDS1_1_C/judge/4573080/Python3)
+&#34;&#34;&#34;
+
+import random
+
+
+def is_prime_miller_rabin(n, k=50):
+    &#34;&#34;&#34;Determing whether the given integer `n` (&gt; 0) is prime by the Miller-Rabin test.
+
+    The parameter `k` represents the accuracy of the determination.
+    &#34;&#34;&#34;
+
+    assert n &gt; 0
+    if n == 2:
+        return True
+    elif n == 1 or n % 2 == 0:
+        return False
+    d = n - 1
+    s = 0
+    while d % 2 == 0:
+        d //= 2
+        s += 1
+    for i in range(k):
+        a = random.randint(1, n - 1)
+        if pow(a, d, n) != 1:
+            for r in range(0, s):
+                if pow(a, d * 2 ** r, n) == n - 1:
+                    break
+            else:
+                return False
+    return True</code></pre>
+</details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="python.number-theory.eratosthenes_sieve" href="eratosthenes_sieve.html">python.number-theory.eratosthenes_sieve</a></code></dt>
+<dt id="python.number-theory.primality_test_miller_rabin.is_prime_miller_rabin"><code class="name flex">
+<span>def <span class="ident">is_prime_miller_rabin</span></span>(<span>n, k=50)</span>
+</code></dt>
 <dd>
-<div class="desc"><p>Enumerates primes using the sieve of Eratosthenes …</p></div>
-</dd>
-<dt><code class="name"><a title="python.number-theory.factorize_trial" href="factorize_trial.html">python.number-theory.factorize_trial</a></code></dt>
-<dd>
-<div class="desc"><p>Compute the prime factorization of the given integer by trial division …</p></div>
-</dd>
-<dt><code class="name"><a title="python.number-theory.primality_test_miller_rabin" href="primality_test_miller_rabin.html">python.number-theory.primality_test_miller_rabin</a></code></dt>
-<dd>
-<div class="desc"><p>Determines whether an input integer is prime, using the Miller-Rabin test …</p></div>
-</dd>
-<dt><code class="name"><a title="python.number-theory.primality_test_trial_division" href="primality_test_trial_division.html">python.number-theory.primality_test_trial_division</a></code></dt>
-<dd>
-<div class="desc"><p>Determines whether an input integer is prime, by trial division …</p></div>
-</dd>
-<dt><code class="name"><a title="python.number-theory.segment_sieve" href="segment_sieve.html">python.number-theory.segment_sieve</a></code></dt>
-<dd>
-<div class="desc"><p>Enumerates primes in an interval …</p></div>
+<div class="desc"><p>Determing whether the given integer <code>n</code> (&gt; 0) is prime by the Miller-Rabin test.</p>
+<p>The parameter <code>k</code> represents the accuracy of the determination.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_prime_miller_rabin(n, k=50):
+    &#34;&#34;&#34;Determing whether the given integer `n` (&gt; 0) is prime by the Miller-Rabin test.
+
+    The parameter `k` represents the accuracy of the determination.
+    &#34;&#34;&#34;
+
+    assert n &gt; 0
+    if n == 2:
+        return True
+    elif n == 1 or n % 2 == 0:
+        return False
+    d = n - 1
+    s = 0
+    while d % 2 == 0:
+        d //= 2
+        s += 1
+    for i in range(k):
+        a = random.randint(1, n - 1)
+        if pow(a, d, n) != 1:
+            for r in range(0, s):
+                if pow(a, d * 2 ** r, n) == n - 1:
+                    break
+            else:
+                return False
+    return True</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -62,16 +121,12 @@
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="python" href="../index.html">python</a></code></li>
+<li><code><a title="python.number-theory" href="index.html">python.number-theory</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
-<ul>
-<li><code><a title="python.number-theory.eratosthenes_sieve" href="eratosthenes_sieve.html">python.number-theory.eratosthenes_sieve</a></code></li>
-<li><code><a title="python.number-theory.factorize_trial" href="factorize_trial.html">python.number-theory.factorize_trial</a></code></li>
-<li><code><a title="python.number-theory.primality_test_miller_rabin" href="primality_test_miller_rabin.html">python.number-theory.primality_test_miller_rabin</a></code></li>
-<li><code><a title="python.number-theory.primality_test_trial_division" href="primality_test_trial_division.html">python.number-theory.primality_test_trial_division</a></code></li>
-<li><code><a title="python.number-theory.segment_sieve" href="segment_sieve.html">python.number-theory.segment_sieve</a></code></li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="python.number-theory.primality_test_miller_rabin.is_prime_miller_rabin" href="#python.number-theory.primality_test_miller_rabin.is_prime_miller_rabin">is_prime_miller_rabin</a></code></li>
 </ul>
 </li>
 </ul>

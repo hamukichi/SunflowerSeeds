@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>python.data-structure.cumulative_sum API documentation</title>
-<meta name="description" content="Cumulative sum …" />
+<title>python.graph.topological_sotring_kahn API documentation</title>
+<meta name="description" content="Performs topological sorting of the given DAG using Kahn&#39;s algorithm …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -18,49 +18,68 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>python.data-structure.cumulative_sum</code></h1>
+<h1 class="title">Module <code>python.graph.topological_sotring_kahn</code></h1>
 </header>
 <section id="section-intro">
-<p>Cumulative sum.</p>
-<p>Verification: <a href="https://judge.yosupo.jp/submission/11777">Static Range Sum</a></p>
+<p>Performs topological sorting of the given DAG using Kahn's algorithm.</p>
+<p>Verification: <a href="https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/GRL_4_B/judge/4573325/Python3">GRL_4_B</a></p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">#!/usr/bin/env python3
 
-&#34;&#34;&#34;Cumulative sum.
+&#34;&#34;&#34;
+Performs topological sorting of the given DAG using Kahn&#39;s algorithm.
 
-Verification: [Static Range Sum](https://judge.yosupo.jp/submission/11777)
+Verification: [GRL_4_B](https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/GRL_4_B/judge/4573325/Python3)
 &#34;&#34;&#34;
 
+import heapq
 
-import itertools
+
+class TopologicalSortError(Exception):
+    &#34;&#34;&#34;This exception is raised when something gets wrong while performing `topological_sort`.
+    &#34;&#34;&#34;    
+    pass
 
 
-class CumulativeSum(object):
-    &#34;&#34;&#34;Constructs the cumulative sum of the elements in the given sequence.
-    
+def topological_sort_kahn(num_vs, adj_vs):
+    &#34;&#34;&#34;Performs topological sorting of the given DAG with modified Kahn&#39;s algorithm.
+
+    This function computes the lexicographically least
+    topological order of the given DAG.
+
     Parameters:
 
-    - `sequence`: The sequence to be processed.
+    - `num_vs`: The number of vertices of the DAG.
+    - `adj_vs` The adjacency list of the DAG.
+
+    Returns: the lexicographically least topological order as a list.
+    
+    Raises `TopologicalSortError` if the given graph is not a DAG.
     &#34;&#34;&#34;
-
-    def __init__(self, sequence):
-        self.cumulative_sum = [0]
-        self.cumulative_sum.extend(itertools.accumulate(sequence))
-
-    def partial_sum(self, first, last):
-        &#34;&#34;&#34;Computes the partial sum of the sequence.
-        
-        Parameters:
-
-        - `first`: The index representing the first element of the subsequence.
-        - `last`: The index representing the last element of the subsequence.
-        
-        Returns: the partial sum.
-        &#34;&#34;&#34;
-        return self.cumulative_sum[last + 1] - self.cumulative_sum[first]</code></pre>
+    
+    in_deg = [0 for _ in range(num_vs)]
+    for dests in adj_vs:
+        for dest in dests:
+            in_deg[dest] += 1
+    sorted_vs = []
+    pq = []
+    for s in range(num_vs):
+        if in_deg[s] == 0:
+            heapq.heappush(pq, s)
+    while pq:
+        u = heapq.heappop(pq)
+        sorted_vs.append(u)
+        for v in adj_vs[u]:
+            in_deg[v] -= 1
+            if in_deg[v] == 0:
+                heapq.heappush(pq, v)
+    if all(x == 0 for x in in_deg):
+        return sorted_vs
+    else:
+        raise TopologicalSortError(&#34;The graph has a cycle&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -68,79 +87,89 @@ class CumulativeSum(object):
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="python.graph.topological_sotring_kahn.topological_sort_kahn"><code class="name flex">
+<span>def <span class="ident">topological_sort_kahn</span></span>(<span>num_vs, adj_vs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Performs topological sorting of the given DAG with modified Kahn's algorithm.</p>
+<p>This function computes the lexicographically least
+topological order of the given DAG.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>num_vs</code>: The number of vertices of the DAG.</li>
+<li><code>adj_vs</code> The adjacency list of the DAG.</li>
+</ul>
+<p>Returns: the lexicographically least topological order as a list.</p>
+<p>Raises <code><a title="python.graph.topological_sotring_kahn.TopologicalSortError" href="#python.graph.topological_sotring_kahn.TopologicalSortError">TopologicalSortError</a></code> if the given graph is not a DAG.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def topological_sort_kahn(num_vs, adj_vs):
+    &#34;&#34;&#34;Performs topological sorting of the given DAG with modified Kahn&#39;s algorithm.
+
+    This function computes the lexicographically least
+    topological order of the given DAG.
+
+    Parameters:
+
+    - `num_vs`: The number of vertices of the DAG.
+    - `adj_vs` The adjacency list of the DAG.
+
+    Returns: the lexicographically least topological order as a list.
+    
+    Raises `TopologicalSortError` if the given graph is not a DAG.
+    &#34;&#34;&#34;
+    
+    in_deg = [0 for _ in range(num_vs)]
+    for dests in adj_vs:
+        for dest in dests:
+            in_deg[dest] += 1
+    sorted_vs = []
+    pq = []
+    for s in range(num_vs):
+        if in_deg[s] == 0:
+            heapq.heappush(pq, s)
+    while pq:
+        u = heapq.heappop(pq)
+        sorted_vs.append(u)
+        for v in adj_vs[u]:
+            in_deg[v] -= 1
+            if in_deg[v] == 0:
+                heapq.heappush(pq, v)
+    if all(x == 0 for x in in_deg):
+        return sorted_vs
+    else:
+        raise TopologicalSortError(&#34;The graph has a cycle&#34;)</code></pre>
+</details>
+</dd>
+</dl>
 </section>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="python.data-structure.cumulative_sum.CumulativeSum"><code class="flex name class">
-<span>class <span class="ident">CumulativeSum</span></span>
-<span>(</span><span>sequence)</span>
+<dt id="python.graph.topological_sotring_kahn.TopologicalSortError"><code class="flex name class">
+<span>class <span class="ident">TopologicalSortError</span></span>
+<span>(</span><span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Constructs the cumulative sum of the elements in the given sequence.</p>
-<p>Parameters:</p>
-<ul>
-<li><code>sequence</code>: The sequence to be processed.</li>
-</ul></div>
+<div class="desc"><p>This exception is raised when something gets wrong while performing <code>topological_sort</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class CumulativeSum(object):
-    &#34;&#34;&#34;Constructs the cumulative sum of the elements in the given sequence.
-    
-    Parameters:
-
-    - `sequence`: The sequence to be processed.
-    &#34;&#34;&#34;
-
-    def __init__(self, sequence):
-        self.cumulative_sum = [0]
-        self.cumulative_sum.extend(itertools.accumulate(sequence))
-
-    def partial_sum(self, first, last):
-        &#34;&#34;&#34;Computes the partial sum of the sequence.
-        
-        Parameters:
-
-        - `first`: The index representing the first element of the subsequence.
-        - `last`: The index representing the last element of the subsequence.
-        
-        Returns: the partial sum.
-        &#34;&#34;&#34;
-        return self.cumulative_sum[last + 1] - self.cumulative_sum[first]</code></pre>
+<pre><code class="python">class TopologicalSortError(Exception):
+    &#34;&#34;&#34;This exception is raised when something gets wrong while performing `topological_sort`.
+    &#34;&#34;&#34;    
+    pass</code></pre>
 </details>
-<h3>Methods</h3>
-<dl>
-<dt id="python.data-structure.cumulative_sum.CumulativeSum.partial_sum"><code class="name flex">
-<span>def <span class="ident">partial_sum</span></span>(<span>self, first, last)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Computes the partial sum of the sequence.</p>
-<p>Parameters:</p>
-<ul>
-<li><code>first</code>: The index representing the first element of the subsequence.</li>
-<li><code>last</code>: The index representing the last element of the subsequence.</li>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
 </ul>
-<p>Returns: the partial sum.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def partial_sum(self, first, last):
-    &#34;&#34;&#34;Computes the partial sum of the sequence.
-    
-    Parameters:
-
-    - `first`: The index representing the first element of the subsequence.
-    - `last`: The index representing the last element of the subsequence.
-    
-    Returns: the partial sum.
-    &#34;&#34;&#34;
-    return self.cumulative_sum[last + 1] - self.cumulative_sum[first]</code></pre>
-</details>
-</dd>
-</dl>
 </dd>
 </dl>
 </section>
@@ -153,16 +182,18 @@ class CumulativeSum(object):
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="python.data-structure" href="index.html">python.data-structure</a></code></li>
+<li><code><a title="python.graph" href="index.html">python.graph</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="python.graph.topological_sotring_kahn.topological_sort_kahn" href="#python.graph.topological_sotring_kahn.topological_sort_kahn">topological_sort_kahn</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="python.data-structure.cumulative_sum.CumulativeSum" href="#python.data-structure.cumulative_sum.CumulativeSum">CumulativeSum</a></code></h4>
-<ul class="">
-<li><code><a title="python.data-structure.cumulative_sum.CumulativeSum.partial_sum" href="#python.data-structure.cumulative_sum.CumulativeSum.partial_sum">partial_sum</a></code></li>
-</ul>
+<h4><code><a title="python.graph.topological_sotring_kahn.TopologicalSortError" href="#python.graph.topological_sotring_kahn.TopologicalSortError">TopologicalSortError</a></code></h4>
 </li>
 </ul>
 </li>

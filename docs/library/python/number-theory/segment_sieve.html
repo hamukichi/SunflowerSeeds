@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>python.number-theory API documentation</title>
-<meta name="description" content="" />
+<title>python.number-theory.segment_sieve API documentation</title>
+<meta name="description" content="Enumerates primes in an interval …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -18,38 +18,104 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Namespace <code>python.number-theory</code></h1>
+<h1 class="title">Module <code>python.number-theory.segment_sieve</code></h1>
 </header>
 <section id="section-intro">
+<p>Enumerates primes in an interval.</p>
+<p>Verification: <a href="https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/0009/judge/4573154/Python3">0009</a></p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#!/usr/bin/env python3
+
+&#34;&#34;&#34;Enumerates primes in an interval.
+
+Verification: [0009](https://onlinejudge.u-aizu.ac.jp/status/users/hamukichi/submissions/1/0009/judge/4573154/Python3)
+&#34;&#34;&#34;
+
+
+import math
+
+
+def segment_sieve(begin, end):
+    &#34;&#34;&#34;Enumerates the prime numbers in [`begin`, `end`).
+
+    Returns (as a tuple):
+
+    - `is_prime`: a list of bool values.
+      If an integer `i` is a prime number, then `is_prime[i - begin]` is True.
+      Otherwise `is_prime[i -begin]` is False.
+    - `primes`: a list of prime numbers in [`begin`, `end`).
+    &#34;&#34;&#34;
+
+    assert 1 &lt; begin &lt;= end
+    sqrt_end = math.ceil(math.sqrt(end))
+    is_prime_small = [True for i in range(sqrt_end)]
+    is_prime_small[0] = False
+    is_prime_small[1] = False
+    is_prime = [True for i in range(end - begin)]
+    for i in range(2, sqrt_end):
+        if is_prime_small[i]:
+            for j in range(2 * i, sqrt_end, i):
+                is_prime_small[j] = False
+            for k in range(max(2, (begin + i - 1) // i) * i, end, i):
+                is_prime[k - begin] = False
+    primes = [i for i, cond in enumerate(is_prime, begin) if cond]
+    return is_prime, primes</code></pre>
+</details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="python.number-theory.eratosthenes_sieve" href="eratosthenes_sieve.html">python.number-theory.eratosthenes_sieve</a></code></dt>
+<dt id="python.number-theory.segment_sieve.segment_sieve"><code class="name flex">
+<span>def <span class="ident">segment_sieve</span></span>(<span>begin, end)</span>
+</code></dt>
 <dd>
-<div class="desc"><p>Enumerates primes using the sieve of Eratosthenes …</p></div>
-</dd>
-<dt><code class="name"><a title="python.number-theory.factorize_trial" href="factorize_trial.html">python.number-theory.factorize_trial</a></code></dt>
-<dd>
-<div class="desc"><p>Compute the prime factorization of the given integer by trial division …</p></div>
-</dd>
-<dt><code class="name"><a title="python.number-theory.primality_test_miller_rabin" href="primality_test_miller_rabin.html">python.number-theory.primality_test_miller_rabin</a></code></dt>
-<dd>
-<div class="desc"><p>Determines whether an input integer is prime, using the Miller-Rabin test …</p></div>
-</dd>
-<dt><code class="name"><a title="python.number-theory.primality_test_trial_division" href="primality_test_trial_division.html">python.number-theory.primality_test_trial_division</a></code></dt>
-<dd>
-<div class="desc"><p>Determines whether an input integer is prime, by trial division …</p></div>
-</dd>
-<dt><code class="name"><a title="python.number-theory.segment_sieve" href="segment_sieve.html">python.number-theory.segment_sieve</a></code></dt>
-<dd>
-<div class="desc"><p>Enumerates primes in an interval …</p></div>
+<div class="desc"><p>Enumerates the prime numbers in [<code>begin</code>, <code>end</code>).</p>
+<p>Returns (as a tuple):</p>
+<ul>
+<li><code>is_prime</code>: a list of bool values.
+If an integer <code>i</code> is a prime number, then <code>is_prime[i - begin]</code> is True.
+Otherwise <code>is_prime[i -begin]</code> is False.</li>
+<li><code>primes</code>: a list of prime numbers in [<code>begin</code>, <code>end</code>).</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def segment_sieve(begin, end):
+    &#34;&#34;&#34;Enumerates the prime numbers in [`begin`, `end`).
+
+    Returns (as a tuple):
+
+    - `is_prime`: a list of bool values.
+      If an integer `i` is a prime number, then `is_prime[i - begin]` is True.
+      Otherwise `is_prime[i -begin]` is False.
+    - `primes`: a list of prime numbers in [`begin`, `end`).
+    &#34;&#34;&#34;
+
+    assert 1 &lt; begin &lt;= end
+    sqrt_end = math.ceil(math.sqrt(end))
+    is_prime_small = [True for i in range(sqrt_end)]
+    is_prime_small[0] = False
+    is_prime_small[1] = False
+    is_prime = [True for i in range(end - begin)]
+    for i in range(2, sqrt_end):
+        if is_prime_small[i]:
+            for j in range(2 * i, sqrt_end, i):
+                is_prime_small[j] = False
+            for k in range(max(2, (begin + i - 1) // i) * i, end, i):
+                is_prime[k - begin] = False
+    primes = [i for i, cond in enumerate(is_prime, begin) if cond]
+    return is_prime, primes</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -62,16 +128,12 @@
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="python" href="../index.html">python</a></code></li>
+<li><code><a title="python.number-theory" href="index.html">python.number-theory</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
-<ul>
-<li><code><a title="python.number-theory.eratosthenes_sieve" href="eratosthenes_sieve.html">python.number-theory.eratosthenes_sieve</a></code></li>
-<li><code><a title="python.number-theory.factorize_trial" href="factorize_trial.html">python.number-theory.factorize_trial</a></code></li>
-<li><code><a title="python.number-theory.primality_test_miller_rabin" href="primality_test_miller_rabin.html">python.number-theory.primality_test_miller_rabin</a></code></li>
-<li><code><a title="python.number-theory.primality_test_trial_division" href="primality_test_trial_division.html">python.number-theory.primality_test_trial_division</a></code></li>
-<li><code><a title="python.number-theory.segment_sieve" href="segment_sieve.html">python.number-theory.segment_sieve</a></code></li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="python.number-theory.segment_sieve.segment_sieve" href="#python.number-theory.segment_sieve.segment_sieve">segment_sieve</a></code></li>
 </ul>
 </li>
 </ul>
