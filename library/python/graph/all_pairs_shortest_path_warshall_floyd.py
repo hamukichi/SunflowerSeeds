@@ -17,9 +17,9 @@ def in_place_warshall_floyd(adj_matrix):
     r"""Solves the all-pairs shortest path problem using the Warshall-Floyd algorithm.
 
     The adjacency matrix A of the graph. This object must be
-    able to be treated as a $$n \times n$$ matrix. $$A_{i, j}$$ represents the
-    cost of the edge $$i \rightarrow j$$. If $$A_{i, j}$$ is `INF` or more,
-    there is no edge between the two vertices. For all $$x$$, $$A_{x, x} = 0$$.
+    able to be treated as a \(n \times n\) matrix. \(A_{i, j}\) represents the
+    cost of the edge \(i \rightarrow j\). If \(A_{i, j}\) is `INF` or more,
+    there is no edge between the two vertices. For all \(x\), \(A_{x, x} = 0\).
     Note that this matrix will be modified in place during calculation.
     
     Returns: whether the graph has a negative cycle.
