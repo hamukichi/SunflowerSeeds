@@ -42,11 +42,11 @@ INF = 1000000000000000000
 
 
 def in_place_warshall_floyd(adj_matrix):
-    &#34;&#34;&#34;Solves the all-pairs shortest path problem using the Warshall-Floyd algorithm.
+    r&#34;&#34;&#34;Solves the all-pairs shortest path problem using the Warshall-Floyd algorithm.
 
     The adjacency matrix A of the graph. This object must be
     able to be treated as a $n \times n$ matrix. $A_{i, j}$ represents the
-    cost of the edge $i \rightarrow j$. If $A_{i, j}$ is `INF`` or more,
+    cost of the edge $i \rightarrow j$. If $A_{i, j}$ is `INF` or more,
     there is no edge between the two vertices. For all $x$, $A_{x, x} = 0$.
     Note that this matrix will be modified in place during calculation.
     
@@ -75,10 +75,8 @@ def in_place_warshall_floyd(adj_matrix):
 <dd>
 <div class="desc"><p>Solves the all-pairs shortest path problem using the Warshall-Floyd algorithm.</p>
 <p>The adjacency matrix A of the graph. This object must be
-able to be treated as a $n
-imes n$ matrix. $A_{i, j}$ represents the
-cost of the edge $i
-ightarrow j$. If $A_{i, j}$ is `INF`` or more,
+able to be treated as a $n \times n$ matrix. $A_{i, j}$ represents the
+cost of the edge $i \rightarrow j$. If $A_{i, j}$ is <code>INF</code> or more,
 there is no edge between the two vertices. For all $x$, $A_{x, x} = 0$.
 Note that this matrix will be modified in place during calculation.</p>
 <p>Returns: whether the graph has a negative cycle.</p></div>
@@ -87,11 +85,11 @@ Note that this matrix will be modified in place during calculation.</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def in_place_warshall_floyd(adj_matrix):
-    &#34;&#34;&#34;Solves the all-pairs shortest path problem using the Warshall-Floyd algorithm.
+    r&#34;&#34;&#34;Solves the all-pairs shortest path problem using the Warshall-Floyd algorithm.
 
     The adjacency matrix A of the graph. This object must be
     able to be treated as a $n \times n$ matrix. $A_{i, j}$ represents the
-    cost of the edge $i \rightarrow j$. If $A_{i, j}$ is `INF`` or more,
+    cost of the edge $i \rightarrow j$. If $A_{i, j}$ is `INF` or more,
     there is no edge between the two vertices. For all $x$, $A_{x, x} = 0$.
     Note that this matrix will be modified in place during calculation.
     
